@@ -2,6 +2,7 @@
   "name": "react-chat",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:9999/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -19,7 +20,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "server": "nodemon server.js",
+    "server": "node server.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
