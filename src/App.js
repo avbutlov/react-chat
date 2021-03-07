@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Login from "./components/login/login";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import socket from "./socket";
-import Chat from "./components/chat/chat";
+import Chat from "./components/chat-room/chat-room";
 
 const App = () => {
   const [users, setUsers] = useState([]);
