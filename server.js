@@ -2,15 +2,8 @@ const express = require("express");
 const app = express();
 const http = require("http").Server(app);
 const io = require("socket.io")(http, { cors: { origin: "*" } });
-const { v4: uuidV4 } = require("uuid");
-app.use(express.json());
 
 const rooms = {};
-
-app.get("/", (req, res) => {
-  console.log(req.body);
-  res.send("dwdw");
-});
 
 io.on("connection", (socket) => {
   
@@ -28,6 +21,7 @@ io.on("connection", (socket) => {
       if (rooms[roomId]) {
           rooms[roomId].users.set(socket.id, userName)
           io.in(roomId).emit("setUsers", [...rooms[roomId].users.values()]);
+          io.in(roomId).emit('setMessages', rooms[roomId].messages);
       }
   })
 
@@ -38,6 +32,17 @@ io.on("connection", (socket) => {
             io.in(room).emit("setUsers", users);
           }
     }
+  })
+
+  socket.on('sendMessage', ({messageText, userName, roomId}) => {
+
+    rooms[roomId].messages.push({
+        messageText,
+        userName
+    })
+
+    io.in(roomId).emit('setMessages', rooms[roomId].messages);
+
   })
 });
 

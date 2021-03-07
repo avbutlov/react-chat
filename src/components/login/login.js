@@ -1,29 +1,31 @@
-import axios from "axios";
-import io from 'socket.io-client'
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import socket from "../../socket";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { v4 as uuidV4 } from 'uuid';
+import { Link } from "react-router-dom";
+import { v4 as uuidV4 } from "uuid";
 
-const Login = ({ roomLink }) => {
+const Login = ({onAuth, roomLink }) => {
   const [userName, setUserName] = useState("");
   const roomId = roomLink || uuidV4();
 
-  const onLogin =  () => {
+  const onLogin = () => {
     if (!userName) {
       return alert("Incorrect data");
     }
-        if (!roomLink) {
-    socket.emit("roomCreate", userName, roomId);
-        } else {
-    socket.emit("roomJoin", userName, roomId);
-        }
-  };
+    if (!roomLink) {
+      socket.emit("roomCreate", userName, roomId);
+    } else {
+      socket.emit("roomJoin", userName, roomId);
+    }
 
+    onAuth(userName, roomId);
+
+  };
 
   return (
     <div className="input-field">
-      <h5>To {roomLink ? "to join this" : "create new"} room type your name</h5>
+      <h5>
+        To {roomLink ? <b>join this</b> : <b>create new</b>} room type your name
+      </h5>
       <input
         placeholder="userName"
         id="userID"
