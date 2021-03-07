@@ -1,10 +1,31 @@
-import React from 'react';
-
+import React, {useState, useEffect} from "react";
+import Login from "./components/login/login";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import socket from "./socket";
 
 function App() {
+
+  const [users, setUsers] = useState({});
+
+
+
+  useEffect(() => {
+    socket.on('setUsers', newUsers => {
+      setUsers(newUsers)
+    })
+  }, [])
+
+  console.log(users)
+
   return (
     <div className="App">
-        <h1>This is my chat!!!</h1>
+      <Router>
+        <Route path='/:id?' render={({match}) => {
+          const { id } = match.params;
+          return <Login roomLink={id}/>
+        }}/>
+        
+      </Router>
     </div>
   );
 }
