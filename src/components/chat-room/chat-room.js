@@ -50,6 +50,12 @@ const Chat = ({ users, userName, roomId, messages }) => {
             onChange={(e) => setMessageText(e.target.value)}
             className="form-control"
             rows="3"
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                sendMessage();
+              }
+            }}
           ></textarea>
           <button
             onClick={sendMessage}
