@@ -10,7 +10,7 @@
     border-right: 1px solid rgba(159, 183, 197, 0.1);
     padding: 20px;
     width: 200px;
-    background-color: #f6f9fa;
+    background-color: yellow;
   }
   
   .chat-messages {
@@ -19,6 +19,7 @@
     justify-content: space-between;
     flex: 1;
     padding: 30px;
+    background-color: coral;
   }
   
   .messages {
@@ -29,7 +30,13 @@
   
   .message {
     margin-bottom: 20px;
+    
   }
+
+  .my-message {
+    text-align: right;
+  }
+
   
   .message p {
     display: inline-flex;
@@ -39,6 +46,11 @@
     padding: 10px 15px 15px;
     color: #fff;
     margin-bottom: 2px;
+  }
+
+  .my-message p {
+    background-color: gold;
+    color: black;
   }
   
   .message span {

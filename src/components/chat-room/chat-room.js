@@ -31,12 +31,16 @@ const Chat = ({ users, userName, roomId, messages }) => {
         <div className="messages">
           {messages.map((messageData) => {
             return (
-              <div className="message">
-                <p>{messageData.messageText}</p>
-                <div>
-                  <span>{messageData.userName}</span>
-                </div>
+              messageData.userName === userName ? <div className="message my-message">
+              <p>{messageData.messageText}</p>
+              <div><span>You</span>
               </div>
+            </div> : 
+              <div className="message">
+              <p>{messageData.messageText}</p>
+              <div><span>{messageData.userName}</span>
+              </div>
+            </div>
             );
           })}
         </div>

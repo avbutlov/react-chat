@@ -8,9 +8,7 @@ const Login = ({onAuth, roomLink }) => {
   const roomId = roomLink || uuidV4();
 
   const onLogin = () => {
-    if (!userName) {
-      return alert("Incorrect data");
-    }
+    
     if (!roomLink) {
       socket.emit("roomCreate", userName, roomId);
     } else {
@@ -24,7 +22,7 @@ const Login = ({onAuth, roomLink }) => {
   return (
     <div className="input-field">
       <h5>
-        To {roomLink ? <b>join this</b> : <b>create new</b>} room type your name
+        To {roomLink ? <b>join this</b> : <b>create new</b>} room, please, type your name
       </h5>
       <input
         placeholder="userName"
@@ -34,10 +32,9 @@ const Login = ({onAuth, roomLink }) => {
         value={userName}
         onChange={(e) => setUserName(e.target.value)}
       />
-      <Link to={`/${roomId}`}>
+      <Link to={`/${roomId}`} onClick={userName ? onLogin : e => e.preventDefault(alert('Incorrect data'))}>
         <button
           className="waves-effect waves-light btn-large"
-          onClick={onLogin}
         >
           enter
         </button>
