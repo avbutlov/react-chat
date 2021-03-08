@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Login from "./components/login/login";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import socket from "./socket";
-import Chat from "./components/chat-room/chat-room";
+import ChatRoom from "./components/chat-room/chat-room";
 
 const App = () => {
   const [users, setUsers] = useState([]);
@@ -15,7 +15,6 @@ const App = () => {
     setEntered(true);
     setCurrentUser(userName);
     setCurrentRoom(roomId);
-    console.log(userName);
   };
 
   useEffect(() => {
@@ -39,7 +38,7 @@ const App = () => {
               return <Login roomLink={id} onAuth={onAuth} />;
             } else {
               return (
-                <Chat
+                <ChatRoom
                   users={users}
                   userName={currentUser}
                   roomId={currentRoom}

@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import socket from "../../socket";
 import "./chat-room.css";
-import { v4 as uuidV4 } from "uuid";
 
-const Chat = ({ users, userName, roomId, messages }) => {
+const ChatRoom = ({ users, userName, roomId, messages }) => {
   const [messageText, setMessageText] = useState("");
 
   const sendMessage = () => {
@@ -11,33 +10,31 @@ const Chat = ({ users, userName, roomId, messages }) => {
       messageText,
       userName,
       roomId,
-    });
+      hours: new Date().getHours(),
+      minutes: new Date().getMinutes()
+    }); 
 
     setMessageText("");
   };
 
+
   return (
-    <div className="chat">
-      <div className="chat-users">
-        <hr />
-        <b>Online: {users.length}</b>
-        <ul>
-          {users.map((name) => {
-            return <li key={uuidV4()}>{name}</li>;
-          })}
-        </ul>
-      </div>
-      <div className="chat-messages">
+   <React.Fragment> 
+    <span className='invite'>To invite your friend send him this link: <b>{window.location.href}</b></span>
+    <div className="chat-room">
+      <div className="messages-wrapper">
         <div className="messages">
-          {messages.map((messageData) => {
+          {messages.map((messageData, ind) => {
             return (
-              messageData.userName === userName ? <div className="message my-message">
+              messageData.userName === userName ? <div className="message my-message" key={`${messageData.userName}${ind}`}>
+              <span>{`${messageData.hours}:${messageData.minutes}`}</span>
               <p>{messageData.messageText}</p>
               <div><span>You</span>
               </div>
             </div> : 
-              <div className="message">
+              <div className="message" key={`${messageData.userName}${ind}`}>
               <p>{messageData.messageText}</p>
+              <span>{`${messageData.hours}:${messageData.minutes}`}</span>
               <div><span>{messageData.userName}</span>
               </div>
             </div>
@@ -48,7 +45,6 @@ const Chat = ({ users, userName, roomId, messages }) => {
           <textarea
             value={messageText}
             onChange={(e) => setMessageText(e.target.value)}
-            className="form-control"
             rows="3"
             onKeyPress={(e) => {
               if (e.key === 'Enter') {
@@ -66,8 +62,17 @@ const Chat = ({ users, userName, roomId, messages }) => {
           </button>
         </form>
       </div>
+      <div className="online">
+        <b>Online: {users.length}</b>
+        <ul>
+          {users.map((name, ind) => {
+            return <li key={`${name}${ind}`}>{name}</li>;
+          })}
+        </ul>
+      </div>
     </div>
+    </React.Fragment>
   );
 };
 
-export default Chat;
+export default ChatRoom;

@@ -1,19 +1,23 @@
-.chat {
+.chat-room {
     display: flex;
     height: 500px;
     border: 1px solid rgba(159, 183, 197, 0.2);
     border-radius: 8px;
     overflow: hidden;
   }
+  .invite {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
   
-  .chat-users {
+  .online {
     border-right: 1px solid rgba(159, 183, 197, 0.1);
     padding: 20px;
     width: 200px;
     background-color: yellow;
   }
   
-  .chat-messages {
+  .messages-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -42,44 +46,51 @@
     display: inline-flex;
     border-radius: 10px;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
-    background-color: #7160ff;
+    background-color: yellow;
     padding: 10px 15px 15px;
-    color: #fff;
+    color: black;
     margin-bottom: 2px;
   }
 
   .my-message p {
-    background-color: gold;
-    color: black;
+    background-color: #26a69a;
+    color: white;
   }
   
   .message span {
-    opacity: 0.5;
+    opacity: 0.7;
     font-size: 14px;
+    margin: 10px;
   }
   
-  .chat-users ul {
+  .online ul {
     list-style: none;
     padding: 0;
     margin: 0;
   }
   
-  .chat-users ul li {
+  .online ul li {
     margin-top: 10px;
     border-radius: 3px;
     background-color: #fff;
     padding: 8px 14px;
     box-shadow: 0 3px 5px rgba(159, 183, 197, 0.1);
     font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
-  .chat-messages form {
+  form {
     margin-top: 20px;
     padding-top: 20px;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
   }
   
-  .chat-messages form textarea {
+  textarea {
     width: 100%;
     margin-bottom: 10px;
+    padding: 12px;
+    outline: none;
+    background-color: white;
+    border-radius: 5px;
   }

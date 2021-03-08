@@ -26,9 +26,13 @@ io.on("connection", (socket) => {
   socket.on('roomJoin', (userName, roomId) => {
     socket.join(roomId);
       if (rooms[roomId]) {
+        if ([...rooms[roomId].users.values()].includes(userName)) {
+          socket.emit('reservedName', userName)
+        } else {
           rooms[roomId].users.set(socket.id, userName)
           io.in(roomId).emit("setUsers", [...rooms[roomId].users.values()]);
           io.in(roomId).emit('setMessages', rooms[roomId].messages);
+        }
       }
   })
 
@@ -41,12 +45,19 @@ io.on("connection", (socket) => {
     }
   })
 
-  socket.on('sendMessage', ({messageText, userName, roomId}) => {
+  socket.on('sendMessage', ({messageText, userName, roomId, hours, minutes}) => {
+
+    if (minutes.toString().length < 2) {
+      minutes = `0${minutes}`
+    } 
 
     rooms[roomId].messages.push({
         messageText,
-        userName
+        userName,
+        hours,
+        minutes
     })
+
 
     io.in(roomId).emit('setMessages', rooms[roomId].messages);
 

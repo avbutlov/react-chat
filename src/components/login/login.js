@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import socket from "../../socket";
 import { Link } from "react-router-dom";
 import { v4 as uuidV4 } from "uuid";
+import './login.css';
 
 const Login = ({onAuth, roomLink }) => {
   const [userName, setUserName] = useState("");
@@ -19,16 +20,21 @@ const Login = ({onAuth, roomLink }) => {
 
   };
 
+  // socket.on("reservedName", userName => {
+  //   alert(`Sorry, but name ${userName} has already taken`);
+  // })
+
   return (
     <div className="input-field">
-      <h5>
+      <span className='login-info'>
         To {roomLink ? <b>join this</b> : <b>create new</b>} room, please, type your name
-      </h5>
+      </span>
       <input
-        placeholder="userName"
+        placeholder="Your name"
         id="userID"
         type="text"
         className="validate"
+        required={true}
         value={userName}
         onChange={(e) => setUserName(e.target.value)}
       />
