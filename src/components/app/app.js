@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Login from "./components/login/login";
+import Login from '../login/login';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import socket from "./socket";
-import ChatRoom from "./components/chat-room/chat-room";
+import socket from '../../socket'
+import ChatRoom from '../chat-room/chat-room'
+import './app.css'
 
 const App = () => {
   const [users, setUsers] = useState([]);
