@@ -5,7 +5,7 @@ const Messages = ({ messages, userName }) => {
 
     const newMessage = useRef(null);
 
-
+// this useEffect hook provides chat scroll down on new messages
     useEffect(() => {
         if (newMessage) {
           newMessage.current.addEventListener("DOMNodeInserted", (e) => {

@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import socket from "../../socket";
 import { Link } from "react-router-dom";
 import { v4 as uuidV4 } from "uuid";
-import './login.css';
+import "./login.css";
 
-const Login = ({onAuth, roomLink }) => {
+const Login = ({ onAuth, roomLink }) => {
   const [userName, setUserName] = useState("");
-  const roomId = roomLink || uuidV4();
+  let roomId = roomLink || uuidV4();
 
+  // this function sends information about users who wants to create room or join it and invokes authenticate function which recieves processed information from server
   const onLogin = () => {
-    
     if (!roomLink) {
       socket.emit("roomCreate", userName, roomId);
     } else {
@@ -17,17 +17,13 @@ const Login = ({onAuth, roomLink }) => {
     }
 
     onAuth(userName, roomId);
-
   };
-
-  // socket.on("reservedName", userName => {
-  //   alert(`Sorry, but name ${userName} has already taken`);
-  // })
 
   return (
     <div className="input-field">
-      <span className='login-info'>
-        To {roomLink ? <b>join this</b> : <b>create new</b>} room, please, type your name
+      <span className="login-info">
+        To {roomLink ? <b>join this</b> : <b>create new</b>} room, please, type
+        your name
       </span>
       <input
         placeholder="Your name"
@@ -38,12 +34,13 @@ const Login = ({onAuth, roomLink }) => {
         value={userName}
         onChange={(e) => setUserName(e.target.value)}
       />
-      <Link to={`/${roomId}`} onClick={userName ? onLogin : e => e.preventDefault(alert('Incorrect data'))}>
-        <button
-          className="waves-effect waves-light btn-large"
-        >
-          enter
-        </button>
+      <Link
+        to={`/${roomId}`}
+        onClick={
+          userName ? onLogin : (e) => e.preventDefault(alert("Incorrect data"))
+        }
+      >
+        <button className="waves-effect waves-light btn-large">enter</button>
       </Link>
     </div>
   );
