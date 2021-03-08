@@ -1,0 +1,36 @@
+.messages {
+    flex: 1;
+    height: calc(100% - 155px);
+    overflow: auto;
+  }
+  
+  .message {
+    margin-bottom: 20px;
+    
+  }
+
+  .my-message {
+    text-align: right;
+  }
+
+  
+  .message p {
+    display: inline-flex;
+    border-radius: 10px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: yellow;
+    padding: 10px 15px 15px;
+    color: black;
+    margin-bottom: 2px;
+  }
+
+  .my-message p {
+    background-color: #26a69a;
+    color: white;
+  }
+  
+  .message span {
+    opacity: 0.7;
+    font-size: 14px;
+    margin: 10px;
+  }
