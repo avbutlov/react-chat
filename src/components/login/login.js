@@ -19,6 +19,7 @@ const Login = ({ onAuth, roomLink }) => {
     onAuth(userName, roomId);
   };
 
+
   return (
     <div className="input-field">
       <span className="login-info">
@@ -42,6 +43,8 @@ const Login = ({ onAuth, roomLink }) => {
       >
         <button className="waves-effect waves-light btn-large">enter</button>
       </Link>
+
+  
     </div>
   );
 };
