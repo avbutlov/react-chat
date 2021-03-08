@@ -3,6 +3,7 @@
     padding: 20px;
     width: 200px;
     background-color: yellow;
+    overflow: auto;
   }
 
 .online-users ul {
