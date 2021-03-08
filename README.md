@@ -1,2 +1,2 @@
 # React Chat Application
-## Deploy: https://dashboard.heroku.com/apps/socket-reactjs-chat
+## Deploy: https://socket-reactjs-chat.herokuapp.com/
